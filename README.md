@@ -1,67 +1,111 @@
-# 3 Tier Men's Hair Care App
+MenCare – Helm-based Kubernetes Deployment
 
-A premium e-commerce application for men's hair care products.
+A 3-tier application deployed on Kubernetes using Helm, consisting of a frontend, backend API, and MySQL database, exposed via Ingress.
+The project is developed and tested locally using kind + nginx ingress and is designed to be extended to AWS EKS with ALB.
 
-## Features
-- **User Accounts**: Signup, Login, Profile Management.
-- **Shop**: Trending products, Product details, Shopping Cart.
-- **Checkout**: Payment placeholder with Card and UPI options.
-- **Admin**: (Database managed) Product listing.
+- Architecture Overview
+User (Browser)
+   ↓
+Ingress (nginx)
+   ↓
+Frontend Service
+   ↓
+Frontend Pods
+   ↓
+Backend Service
+   ↓
+Backend Pods
+   ↓
+MySQL Database
 
-## Tech Stack
-- **Frontend**: React (Vite), Vanilla CSS (Premium UI).
-- **Backend**: Node.js, Express.
-- **Database**: MySQL.
+- Tech Stack
 
-## Prerequisites
-- Node.js installed.
-- MySQL Server installed and running.
+Docker (containerization)
+Kubernetes (kind locally, EKS planned)
+Helm (deployment & configuration)
+Nginx Ingress Controller
+MySQL
+Git & GitHub
 
-## Setup Instructions
+📂 Repository Structure
+men-care-helm-k8s/
+├── Chart.yaml
+├── values.yaml
+├── README.md
+└── templates/
+    ├── frontend-deployment.yaml
+    ├── frontend-service.yaml
+    ├── backend-deployment.yaml
+    ├── backend-service.yaml
+    ├── mysql-statefulset.yaml
+    └── ingress.yaml
 
-### 1. Database Setup
-1. Open your MySQL client (Workbench, Command Line, etc.).
-2. Create a new database named `men_haircare_db`.
-3. Import the `backend/schema.sql` file to create the tables.
+✅ Prerequisites
 
-### 2. Backend Setup
-1. Navigate to the `backend` folder:
-   ```bash
-   cd backend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Create a `.env` file in the `backend` folder with the following content:
-   ```env
-   PORT=5000
-   DB_HOST=localhost
-   DB_USER=your_mysql_user
-   DB_PASSWORD=your_mysql_password
-   DB_NAME=men_haircare_db
-   JWT_SECRET=your_jwt_secret_key
-   ```
-4. Start the server:
-   ```bash
-   npm start
-   ```
+- Make sure the following are installed on your system:
 
-### 3. Frontend Setup
-1. Navigate to the `frontend` folder:
-   ```bash
-   cd frontend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
+Docker
+kubectl
+Helm (v3+)
+kind
+Git
+Windows with WSL2 (or Linux/macOS)
 
-## Folder Structure
-- `backend/`: API routes, controllers, and database logic.
-- `frontend/`: React application and styles.
+- Verify versions:
 
+docker --version
+kubectl version --client
+helm version
+kind version
+
+🚀 Installation & Setup Guide (Local)
+Step 1: Create Kubernetes Cluster using kind
+kind create cluster --name mencare
+
+Verify:
+
+kubectl get nodes
+
+Step 2: Install Nginx Ingress Controller
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+
+Wait until ingress pods are running:
+
+kubectl get pods -n ingress-nginx
+
+Step 3: Clone Repository
+git clone https://github.com/<your-username>/men-care-helm-k8s.git
+cd men-care-helm-k8s
+
+Step 4: Install Application using Helm
+helm install mencare . -n mencare --create-namespace
+
+Verify resources:
+
+kubectl get pods -n mencare
+kubectl get svc -n mencare
+kubectl get ingress -n mencare
+
+Step 5: Port-forward Ingress Controller
+kubectl port-forward -n ingress-nginx svc/ingress-nginx-controller 8080:80
+
+Step 6: Configure Local DNS (Windows)
+Open Notepad as Administrator and edit:
+C:\Windows\System32\drivers\etc\hosts
+
+Add:
+127.0.0.1 mencare.local (Works the same for everyone.)
+
+Flush DNS:
+ipconfig /flushdns
+
+Step 7: Access Application
+
+Open browser:
+http://mencare.local:8080
+
+- For Linux steps (Ubuntu / RHEL / Amazon Linux)
+Get EC2 public IP
+From AWS Console → EC2 → Instance → Public IPv4 address or EC2 Public DNS
+
+✅ Application should load successfully.
