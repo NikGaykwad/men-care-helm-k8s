@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: frontend
+  namespace: {{ .Values.namespace }}
+spec:
+  type: ClusterIP
+  selector:
+   app: mencare-frontend
+  ports:
+   - protocol: TCP
+     port: 80
+     targetPort: 80 # ingress will expose this

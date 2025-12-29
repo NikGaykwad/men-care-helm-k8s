@@ -1,0 +1,40 @@
+# Namespace
+namespace: mencare
+
+# Backend application
+backend:
+  image:
+    repository: nikhilg032/mencare-app-backend
+    tag: latest
+  replicas: 2
+  port: 5000
+
+# Frontend application
+frontend:
+  image:
+    repository: nikhilg032/mencare-app-frontend
+    tag: latest
+  replicas: 2
+  port: 80
+
+# MySQL (NON-SENSITIVE ONLY)
+mysql:
+  image:
+    repository: mysql
+    tag: "8.0"
+  replicas: 1
+  containerPort: 3306
+  database: men_care_db
+mencare-backend-5d8f6976d5-v8qkr  user: mencare_user
+
+# JWT (lab only – fine for now)
+jwt:
+  secret: "5f94cd1311cdcb28bb71a74c41312f9cf179964cd8b978163660331ed4250464"
+
+# Ingress
+ingress:
+  enabled: true
+  className: nginx
+  host: mencare.local
+  frontendPath: /
+
