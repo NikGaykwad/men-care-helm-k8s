@@ -1,4 +1,4 @@
-# Men's Hair Care App
+# 3 Tier Men's Hair Care App
 
 A premium e-commerce application for men's hair care products.
 
@@ -64,3 +64,4 @@ A premium e-commerce application for men's hair care products.
 ## Folder Structure
 - `backend/`: API routes, controllers, and database logic.
 - `frontend/`: React application and styles.
+
