@@ -1,62 +1,3 @@
-<<<<<<< HEAD
-MenCare – Helm-based Kubernetes Deployment
-
-A 3-tier application deployed on Kubernetes using Helm, consisting of a frontend, backend API, and MySQL database, exposed via Ingress.
-The project is developed and tested locally using kind + nginx ingress and is designed to be extended to AWS EKS with ALB.
-
-## Tech Stack
-- Frontend: React (Vite), Vanilla CSS (Premium UI)
-- Backend: Node.js, Express
-- Database: MySQL
-Docker (containerization)
-Kubernetes (kind locally, EKS planned)
-Helm (deployment & configuration)
-Nginx Ingress Controller
-Git & GitHub
-
-  
-- Architecture Overview
-User (Browser)
-   ↓
-Ingress (nginx)
-   ↓
-Frontend Service
-   ↓
-Frontend Pods
-   ↓
-Backend Service
-   ↓
-Backend Pods
-   ↓
-MySQL Database
-
-📂 Repository Structure
-men-care-helm-k8s/
-├── Chart.yaml
-├── values.yaml
-├── README.md
-└── templates/
-    ├── frontend-deployment.yaml
-    ├── frontend-service.yaml
-    ├── backend-deployment.yaml
-    ├── backend-service.yaml
-    ├── mysql-statefulset.yaml
-    └── ingress.yaml
-
-✅ Prerequisites
-
-- Make sure the following are installed on your system:
-
-Docker
-kubectl
-Helm (v3+)
-kind
-Git
-Windows with WSL2 (or Linux/macOS)
-
-- Verify versions:
-
-=======
 # 🧴 MenCare – Helm-based Kubernetes Deployment
 
 A **Production-style 3-tier application** deployed on Kubernetes using **Helm**, consisting of a **React frontend**, **Node.js backend API**, and **MySQL database**, exposed through **Ingress**.
@@ -64,6 +5,7 @@ A **Production-style 3-tier application** deployed on Kubernetes using **Helm**,
 The project is **developed and tested locally using kind + Nginx Ingress** and is **designed to be extended to AWS EKS using ALB Ingress**.
 
 This repo is ideal for:
+
 - Learning Helm the right way
 - Understanding real-world Kubernetes app structure
 - Practicing DevOps deployment workflows end to end
@@ -91,6 +33,7 @@ MySQL (StatefulSet)
 ```
 
 **Tier Breakdown**
+
 - **Presentation Tier**: React frontend
 - **Application Tier**: Node.js backend API
 - **Data Tier**: MySQL database
@@ -100,11 +43,13 @@ MySQL (StatefulSet)
 ## 🧰 Tech Stack
 
 **Application**
+
 - Frontend: React (Vite), Vanilla CSS (Premium UI)
 - Backend: Node.js, Express
 - Database: MySQL
 
 **DevOps / Infra**
+
 - Docker (containerization)
 - Kubernetes (kind locally, EKS planned)
 - Helm (templated deployments)
@@ -129,7 +74,7 @@ men-care-helm-k8s/
 ├── mysql-statefulset.yaml
 └── ingress.yaml
 
-````
+```
 
 ---
 
@@ -152,61 +97,8 @@ docker --version
 kubectl version --client
 helm version
 kind version
-<<<<<<< HEAD
 
-🚀 Installation & Setup Guide (Local)
-Step 1: Create Kubernetes Cluster using kind
-kind create cluster --name mencare
-
-Verify:
-
-kubectl get nodes
-
-Step 2: Install Nginx Ingress Controller
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
-
-Wait until ingress pods are running:
-
-kubectl get pods -n ingress-nginx
-
-Step 3: Clone Repository
-git clone https://github.com/<your-username>/men-care-helm-k8s.git
-cd men-care-helm-k8s
-
-Step 4: Install Application using Helm
-helm install mencare . -n mencare --create-namespace
-
-Verify resources:
-
-kubectl get pods -n mencare
-kubectl get svc -n mencare
-kubectl get ingress -n mencare
-
-Step 5: Port-forward Ingress Controller
-kubectl port-forward -n ingress-nginx svc/ingress-nginx-controller 8080:80
-
-Step 6: Configure Local DNS (Windows)
-Open Notepad as Administrator and edit:
-C:\Windows\System32\drivers\etc\hosts
-
-Add:
-127.0.0.1 mencare.local (Works the same for everyone.)
-
-Flush DNS:
-ipconfig /flushdns
-
-Step 7: Access Application
-
-Open browser:
-http://mencare.local:8080
-
-- For Linux steps (Ubuntu / RHEL / Amazon Linux)
-Get EC2 public IP
-From AWS Console → EC2 → Instance → Public IPv4 address or EC2 Public DNS
-
-✅ Application should load successfully.
-=======
-````
+```
 
 ---
 
@@ -313,8 +205,8 @@ http://mencare.local:8080
 
 If running on Linux or EC2:
 
-* Use **EC2 Public IP or Public DNS**
-* Ensure port `80/8080` is allowed in Security Groups
+- Use **EC2 Public IP or Public DNS**
+- Ensure port `80/8080` is allowed in Security Groups
 
 Example:
 
@@ -334,9 +226,9 @@ values.yaml
 
 You can easily create:
 
-* `values-dev.yaml`
-* `values-qa.yaml`
-* `values-prod.yaml`
+- `values-dev.yaml`
+- `values-qa.yaml`
+- `values-prod.yaml`
 
 Example:
 
@@ -348,24 +240,22 @@ helm install mencare . -f values-dev.yaml -n mencare
 
 ## 📈 Future Enhancements (Recommended)
 
-* Migrate kind → **AWS EKS**
-* Replace Nginx Ingress with **AWS ALB Ingress Controller**
-* Use **AWS RDS** instead of MySQL StatefulSet
-* Add **CI/CD (GitHub Actions / Jenkins)**
-* Add **Secrets via AWS Secrets Manager**
-* Add **Monitoring (Prometheus + Grafana)**
-* Enable **HPA & Auto Scaling**
-* Use **Helmfile or ArgoCD** for GitOps
+- Migrate kind → **AWS EKS**
+- Replace Nginx Ingress with **AWS ALB Ingress Controller**
+- Use **AWS RDS** instead of MySQL StatefulSet
+- Add **CI/CD (GitHub Actions / Jenkins)**
+- Add **Secrets via AWS Secrets Manager**
+- Add **Monitoring (Prometheus + Grafana)**
+- Enable **HPA & Auto Scaling**
+- Use **Helmfile or ArgoCD** for GitOps
 
 ---
 
 ## 🧠 Key Learnings from This Project
 
-* Real Helm chart structuring
-* Ingress-based routing
-* Kubernetes service-to-service communication
-* Stateful vs stateless workloads
-* Environment-agnostic deployments
-* Production-style DevOps thinking
->>>>>>> 77bd906 (New Readme.me)
-
+- Real Helm chart structuring
+- Ingress-based routing
+- Kubernetes service-to-service communication
+- Stateful vs stateless workloads
+- Environment-agnostic deployments
+- Production-style DevOps thinking
