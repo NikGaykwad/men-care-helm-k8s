@@ -3,6 +3,17 @@ MenCare – Helm-based Kubernetes Deployment
 A 3-tier application deployed on Kubernetes using Helm, consisting of a frontend, backend API, and MySQL database, exposed via Ingress.
 The project is developed and tested locally using kind + nginx ingress and is designed to be extended to AWS EKS with ALB.
 
+## Tech Stack
+- Frontend: React (Vite), Vanilla CSS (Premium UI)
+- Backend: Node.js, Express
+- Database: MySQL
+Docker (containerization)
+Kubernetes (kind locally, EKS planned)
+Helm (deployment & configuration)
+Nginx Ingress Controller
+Git & GitHub
+
+  
 - Architecture Overview
 User (Browser)
    ↓
@@ -17,15 +28,6 @@ Backend Service
 Backend Pods
    ↓
 MySQL Database
-
-- Tech Stack
-
-Docker (containerization)
-Kubernetes (kind locally, EKS planned)
-Helm (deployment & configuration)
-Nginx Ingress Controller
-MySQL
-Git & GitHub
 
 📂 Repository Structure
 men-care-helm-k8s/
@@ -109,3 +111,4 @@ Get EC2 public IP
 From AWS Console → EC2 → Instance → Public IPv4 address or EC2 Public DNS
 
 ✅ Application should load successfully.
+
