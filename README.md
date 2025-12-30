@@ -118,7 +118,23 @@ kubectl get nodes
 
 ---
 
-### Step 2: Install Nginx Ingress Controller
+### Step 2: Install helm
+
+```bash
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4
+chmod 700 get_helm.sh
+./get_helm.sh
+```
+
+Verify:
+
+```bash
+helm version
+```
+
+---
+
+### Step 3  : Install Nginx Ingress Controller
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
@@ -132,7 +148,7 @@ kubectl get pods -n ingress-nginx
 
 ---
 
-### Step 3: Clone Repository
+### Step 4: Clone Repository
 
 ```bash
 git clone https://github.com/NikGaykwad/men-care-helm-k8s.git
@@ -141,7 +157,7 @@ cd men-care-helm-k8s
 
 ---
 
-### Step 4: Install Application Using Helm
+### Step 5: Install Application Using Helm
 
 ```bash
 helm install mencare . -n mencare --create-namespace
@@ -157,7 +173,7 @@ kubectl get ingress -n mencare
 
 ---
 
-### Step 5: Port-forward Ingress Controller
+### Step 6: Port-forward Ingress Controller
 
 ```bash
 kubectl port-forward -n ingress-nginx svc/ingress-nginx-controller 8080:80
@@ -165,7 +181,7 @@ kubectl port-forward -n ingress-nginx svc/ingress-nginx-controller 8080:80
 
 ---
 
-### Step 6: Configure Local DNS (Windows)
+### Step 7: Configure Local DNS (Windows)
 
 Open **Notepad as Administrator** and edit:
 
@@ -189,7 +205,7 @@ ipconfig /flushdns
 
 ---
 
-### Step 7: Access Application
+### Step 8: Access Application
 
 Open browser:
 
